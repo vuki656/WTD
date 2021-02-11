@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "529897088428",
+    "project_id": "wtd-development-ac447",
+    "storage_bucket": "wtd-development-ac447.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529897088428:android:1ea85d913fca50d01fc609",
+        "android_client_info": {
+          "package_name": "com.wtd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529897088428-qlpirulqav60grs3s938s8psfq5bndci.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wtd",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "529897088428-hudun0c47un7u9d04uvr6gt3lbovroof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3yX1a09_FZ09QhX9MXcVjnThL2xkBfLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529897088428-hudun0c47un7u9d04uvr6gt3lbovroof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
