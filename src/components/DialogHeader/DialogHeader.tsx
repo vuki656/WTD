@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'row',
+        fontFamily: theme.fontFamily.RobotoBold,
         fontSize: theme.fontSize.title,
         justifyContent: 'flex-start',
     },

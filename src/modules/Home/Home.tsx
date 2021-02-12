@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: theme.color.gray.light350,
         borderRadius: 5,
-        borderWidth: 2,
+        borderWidth: 1,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
     logOutButtonText: {
         color: theme.color.gray.light200,
-        fontFamily: theme.fontFamily.RobotoBold,
+        fontFamily: theme.fontFamily.RobotoRegular,
     },
     root: {
         alignItems: 'center',

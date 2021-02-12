@@ -1,7 +1,6 @@
 import { useFormik } from 'formik'
 import * as React from 'react'
 import {
-    Button,
     StyleSheet,
     Text,
     TextInput,
@@ -21,11 +20,30 @@ import theme from '../../../lib/variables/theme'
 import type { HomeAddDialogFormTypes } from './HomeAddDialog.types'
 
 const styles = StyleSheet.create({
+    cancelButton: {
+        backgroundColor: theme.color.purple.main,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+    },
+    confirmButton: {
+        backgroundColor: theme.color.green.main,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+    },
+    confirmButtonText: {
+        color: theme.color.white,
+    },
+    dialogButtonText: {
+        color: theme.color.white,
+    },
     inputField: {
         borderColor: theme.color.gray.light350,
         borderRadius: 5,
         borderWidth: 1,
         paddingHorizontal: 15,
+        paddingVertical: 5,
         width: '100%',
     },
     toggleButton: {
@@ -60,11 +78,13 @@ export const HomeAddDialog: React.FunctionComponent = () => {
 
     const handleCancel = () => {
         toggleOpen()
+        form.resetForm()
     }
 
     const handleSubmit = () => {
         form.handleSubmit()
         toggleOpen()
+        form.resetForm()
     }
 
     return (
@@ -87,14 +107,22 @@ export const HomeAddDialog: React.FunctionComponent = () => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button
+                    <TouchableOpacity
                         onPress={handleCancel}
-                        title="Cancel"
-                    />
-                    <Button
+                        style={styles.cancelButton}
+                    >
+                        <Text style={styles.dialogButtonText}>
+                            Cancel
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
                         onPress={handleSubmit}
-                        title="Add"
-                    />
+                        style={styles.confirmButton}
+                    >
+                        <Text style={styles.confirmButtonText}>
+                            Add
+                        </Text>
+                    </TouchableOpacity>
                 </DialogActions>
             </Dialog>
         </>
