@@ -19,6 +19,9 @@
 		46DAAB456ECC4C13AABE73F2 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206F0669D5F84090A57B9AF4 /* Comfortaa-Bold.ttf */; };
 		D8CFCC1FC738490B8C0919BB /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C44F65F50AB7410895E8F2CE /* Comfortaa-Light.ttf */; };
 		0E34B1E8D5694507B070F6E7 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F8308C9EDA3483BB6EFB62F /* Comfortaa-Regular.ttf */; };
+		0A8ED49B11084557A22D5854 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB508EC567504D68B9307E5E /* Roboto-Bold.ttf */; };
+		17F9DA46EDD043489C81B3A1 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA1B99EAFDE4E6B8E9C0CA6 /* Roboto-Light.ttf */; };
+		BE96B21BF7724B7AB6FD0321 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9D5D93C211F4B7B8B0A1B74 /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,9 @@
 		206F0669D5F84090A57B9AF4 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; name = "Comfortaa-Bold.ttf"; path = "../assets/fonts/Comfortaa-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C44F65F50AB7410895E8F2CE /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; name = "Comfortaa-Light.ttf"; path = "../assets/fonts/Comfortaa-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		6F8308C9EDA3483BB6EFB62F /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; name = "Comfortaa-Regular.ttf"; path = "../assets/fonts/Comfortaa-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AB508EC567504D68B9307E5E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; name = "Roboto-Bold.ttf"; path = "../assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FCA1B99EAFDE4E6B8E9C0CA6 /* Roboto-Light.ttf */ = {isa = PBXFileReference; name = "Roboto-Light.ttf"; path = "../assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B9D5D93C211F4B7B8B0A1B74 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +176,9 @@
 				206F0669D5F84090A57B9AF4 /* Comfortaa-Bold.ttf */,
 				C44F65F50AB7410895E8F2CE /* Comfortaa-Light.ttf */,
 				6F8308C9EDA3483BB6EFB62F /* Comfortaa-Regular.ttf */,
+				AB508EC567504D68B9307E5E /* Roboto-Bold.ttf */,
+				FCA1B99EAFDE4E6B8E9C0CA6 /* Roboto-Light.ttf */,
+				B9D5D93C211F4B7B8B0A1B74 /* Roboto-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -316,6 +325,9 @@
 				46DAAB456ECC4C13AABE73F2 /* Comfortaa-Bold.ttf in Resources */,
 				D8CFCC1FC738490B8C0919BB /* Comfortaa-Light.ttf in Resources */,
 				0E34B1E8D5694507B070F6E7 /* Comfortaa-Regular.ttf in Resources */,
+				0A8ED49B11084557A22D5854 /* Roboto-Bold.ttf in Resources */,
+				17F9DA46EDD043489C81B3A1 /* Roboto-Light.ttf in Resources */,
+				BE96B21BF7724B7AB6FD0321 /* Roboto-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

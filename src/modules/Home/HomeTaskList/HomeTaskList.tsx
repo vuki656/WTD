@@ -11,25 +11,30 @@ import { HomeTaskItem } from '../HomeTaskItem'
 
 import type { TaskType } from './HomeTaskList.types'
 
-const items = [
+const items: TaskType[] = [
     {
+        completed: true,
         id: 'aljsgnlagnaksnga',
         name: 'Read 5 Pages',
     }, {
+        completed: true,
         id: 'aljsgn23f23f23flagnaksnga',
         name: 'Go for a run',
     },
     {
+        completed: true,
         id: 'aljsasfsagasggnlagnaksnga',
         name: 'Wash your teeth in the morning',
     },
     {
+        completed: false,
         id: 'aljsg13g1g1gnlagnaksnga',
         name: 'Wash your teeth in the evening',
     },
     {
+        completed: false,
         id: 'aljsgnagagaglagnaksnga',
-        name: '10 Pushups',
+        name: '10 Pushupaaa',
     },
 ]
 

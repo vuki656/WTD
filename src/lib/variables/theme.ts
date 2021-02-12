@@ -2,11 +2,23 @@
 
 export default {
     color: {
+        green: {
+            main: '#50d890',
+        },
+        yellow: {
+            main: '#ffb428',
+        },
+        red: {
+            main: '#ff6b7a',
+        },
         black: 'black',
         white: 'white',
         blue: {
             main: '#212f4f',
             light500: '#f3f6f9',
+        },
+        purple: {
+            main: '#5565f1',
         },
         gray: {
             dark500: '#0d0d0d',
@@ -23,6 +35,14 @@ export default {
             light450: '#ededed',
             light500: '#f2f2f2',
         },
+    },
+    fontFamily: {
+        ComfortaaLight: 'Comfortaa-Light',
+        ComfortaaRegular: 'Comfortaa-Regular',
+        ComfortaaBold: 'Comfortaa-Bold',
+        RobotoLight: 'Roboto-Light',
+        RobotoRegular: 'Roboto-Regular',
+        RobotoBold: 'Roboto-Bold',
     },
     fontSize: {
         caption: 10,

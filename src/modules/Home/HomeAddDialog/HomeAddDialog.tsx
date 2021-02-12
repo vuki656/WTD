@@ -3,7 +3,9 @@ import * as React from 'react'
 import {
     Button,
     StyleSheet,
+    Text,
     TextInput,
+    TouchableOpacity,
 } from 'react-native'
 import useToggle from 'react-use/lib/useToggle'
 import * as Yup from 'yup'
@@ -25,6 +27,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: 15,
         width: '100%',
+    },
+    toggleButton: {
+        backgroundColor: theme.color.purple.main,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+    },
+    toggleButtonText: {
+        color: theme.color.white,
     },
 })
 
@@ -58,10 +69,14 @@ export const HomeAddDialog: React.FunctionComponent = () => {
 
     return (
         <>
-            <Button
+            <TouchableOpacity
                 onPress={toggleOpen}
-                title="Add"
-            />
+                style={styles.toggleButton}
+            >
+                <Text style={styles.toggleButtonText}>
+                    Add
+                </Text>
+            </TouchableOpacity>
             <Dialog isOpen={isOpen}>
                 <DialogHeader title="Add New" />
                 <DialogContent>

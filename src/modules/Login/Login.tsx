@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: theme.color.blue.main,
-        fontFamily: 'Comfortaa-Bold',
+        fontFamily: theme.fontFamily.ComfortaaBold,
         fontSize: 30,
         marginBottom: 20,
     },
