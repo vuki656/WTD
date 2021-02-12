@@ -8,6 +8,7 @@ import {
 
 import { HomeAddDialog } from './HomeAddDialog'
 import { HomeCounters } from './HomeCounters'
+import { HomeTaskList } from './HomeTaskList'
 
 const styles = StyleSheet.create({
     date: {
@@ -16,6 +17,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         marginTop: 20,
         width: '100%',
+    },
+    header: {
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     root: {
         alignItems: 'center',
@@ -31,11 +38,13 @@ export const Home: React.FunctionComponent = () => {
     return (
         <View style={styles.root}>
             <HomeCounters />
-            <Text style={styles.date}>
-                {dayjs().format('DD/MM/YYYY')}
-            </Text>
-
-            <HomeAddDialog />
+            <View style={styles.header}>
+                <Text style={styles.date}>
+                    {dayjs().format('DD/MM/YYYY')}
+                </Text>
+                <HomeAddDialog />
+            </View>
+            <HomeTaskList />
         </View>
     )
 }
