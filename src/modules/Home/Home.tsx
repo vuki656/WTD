@@ -1,6 +1,8 @@
+import auth from '@react-native-firebase/auth'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {
+    Button,
     StyleSheet,
     Text,
     View,
@@ -45,6 +47,10 @@ export const Home: React.FunctionComponent = () => {
                 <HomeAddDialog />
             </View>
             <HomeTaskList />
+            <Button
+                onPress={async () => auth().signOut()}
+                title="LogOut"
+            />
         </View>
     )
 }

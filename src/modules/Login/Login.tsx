@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
+        fontFamily: 'Comfortaa-Regular',
         fontSize: 30,
         marginBottom: 50,
     },
