@@ -20,7 +20,7 @@ import type { HomeAddDialogFormTypes } from './HomeAddDialog.types'
 
 const styles = StyleSheet.create({
     inputField: {
-        borderColor: theme.color.grayNew.light350,
+        borderColor: theme.color.gray.light350,
         borderRadius: 5,
         borderWidth: 1,
         paddingHorizontal: 15,

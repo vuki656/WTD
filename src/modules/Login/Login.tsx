@@ -10,6 +10,8 @@ import {
     View,
 } from 'react-native'
 
+import theme from '../../lib/variables/theme'
+
 const styles = StyleSheet.create({
     button: {
         height: 48,
@@ -17,6 +19,7 @@ const styles = StyleSheet.create({
     },
     root: {
         alignItems: 'center',
+        backgroundColor: theme.color.blue.light500,
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
@@ -24,9 +27,10 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontFamily: 'Comfortaa-Regular',
+        color: theme.color.blue.main,
+        fontFamily: 'Comfortaa-Bold',
         fontSize: 30,
-        marginBottom: 50,
+        marginBottom: 20,
     },
 })
 

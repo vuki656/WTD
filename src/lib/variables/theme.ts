@@ -2,21 +2,19 @@
 
 export default {
     color: {
-        red: 'red',
         black: 'black',
-        gray: '#8a8a8a',
-        gray100: '#000000',
-        gray200: '#5f7d95',
-        gray300: '#eff3f6',
-        gray500: '#cccccc',
         white: 'white',
-        orange: '#f78e00',
-        grayNew: {
-            dark100: '#666666',
-            dark200: '#4d4d4d',
-            dark300: '#333333',
-            dark400: '#191919',
+        blue: {
+            main: '#212f4f',
+            light500: '#f3f6f9',
+        },
+        gray: {
             dark500: '#0d0d0d',
+            dark400: '#191919',
+            dark300: '#333333',
+            dark200: '#4d4d4d',
+            dark100: '#666666',
+            main: '#808080',
             light100: '#999999',
             light200: '#b3b3b3',
             light300: '#cccccc',
@@ -24,7 +22,6 @@ export default {
             light400: '#e6e6e6',
             light450: '#ededed',
             light500: '#f2f2f2',
-            main: '#808080',
         },
     },
     fontSize: {

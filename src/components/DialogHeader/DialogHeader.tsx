@@ -11,7 +11,7 @@ import type { DialogHeaderProps } from './DialogHeader.types'
 
 const styles = StyleSheet.create({
     note: {
-        color: theme.color.gray,
+        color: theme.color.gray.main,
         fontSize: theme.fontSize.text,
         marginTop: 10,
     },
