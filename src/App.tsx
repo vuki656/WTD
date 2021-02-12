@@ -1,7 +1,7 @@
 import { GoogleSignin } from '@react-native-community/google-signin'
 import * as React from 'react'
 
-import { useAuthInit } from './lib/useAuthInit/useAuthInit'
+import { useAuthInit } from './lib/hooks/useAuthInit/useAuthInit'
 import { Home } from './modules/Home'
 import { Login } from './modules/Login'
 

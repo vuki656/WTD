@@ -6,6 +6,7 @@ import {
     View,
 } from 'react-native'
 
+import { HomeAddDialog } from './HomeAddDialog'
 import { HomeCounters } from './HomeCounters'
 
 const styles = StyleSheet.create({
@@ -33,6 +34,8 @@ export const Home: React.FunctionComponent = () => {
             <Text style={styles.date}>
                 {dayjs().format('DD/MM/YYYY')}
             </Text>
+
+            <HomeAddDialog />
         </View>
     )
 }
