@@ -1,3 +1,5 @@
+import cuid from 'cuid'
+import dayjs from 'dayjs'
 import { useFormik } from 'formik'
 import * as React from 'react'
 import {
@@ -10,12 +12,16 @@ import useToggle from 'react-use/lib/useToggle'
 import * as Yup from 'yup'
 
 import {
-    Checkbox,
     Dialog,
     DialogActions,
     DialogContent,
     DialogHeader,
 } from '../../../components'
+import {
+    COLLECTION,
+    connection,
+} from '../../../lib/utils/connection'
+import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
 import theme from '../../../lib/variables/theme'
 
 import type { HomeAddDialogFormTypes } from './HomeAddDialog.types'
@@ -72,13 +78,45 @@ const ValidationSchema = Yup.object()
 export const HomeAddDialog: React.FunctionComponent = () => {
     const [isOpen, toggleOpen] = useToggle(false)
 
+    const user = getCurrentUser()
+
+    const saveTaskInHistory = async (
+        formValues: HomeAddDialogFormTypes,
+        taskId: string
+    ) => {
+        const todaysDate = dayjs().format('DD-MM-YYYY')
+
+        await connection(COLLECTION.TASK_HISTORY)
+            .doc(taskId)
+            .set({
+                date: todaysDate,
+                id: taskId,
+                isCompleted: false,
+                name: formValues.name,
+                user: user?.uid,
+            })
+    }
+
+    const saveTask = async (formValues: HomeAddDialogFormTypes) => {
+        const taskId = cuid()
+
+        await connection(COLLECTION.TASKS)
+            .doc(taskId)
+            .set({
+                id: taskId,
+                name: formValues.name,
+                user: user?.uid,
+            })
+
+        await saveTaskInHistory(formValues, taskId)
+    }
+
     const form = useFormik<HomeAddDialogFormTypes>({
         initialValues: {
-            isRepeating: false,
             name: '',
         },
         onSubmit: (formValues) => {
-            console.log(formValues)
+            void saveTask(formValues)
         },
         validateOnChange: false,
         validationSchema: ValidationSchema,
@@ -116,15 +154,6 @@ export const HomeAddDialog: React.FunctionComponent = () => {
                         onChangeText={form.handleChange('name')}
                         style={styles.inputField}
                         value={form.values.name}
-                    />
-                    <Checkbox
-                        falseCheckboxColor={theme.color.red.main}
-                        isChecked={form.values.isRepeating}
-                        label="Repeat"
-                        onValueChange={async (value) => form.setFieldValue('isRepeating', value)}
-                        strikeTroughOnTrue={false}
-                        style={styles.checkbox}
-                        trueCheckboxColor={theme.color.green.main}
                     />
                 </DialogContent>
                 <DialogActions>
