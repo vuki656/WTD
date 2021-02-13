@@ -5,10 +5,10 @@ import * as React from 'react'
 import {
     StyleSheet,
     Text,
-    TouchableOpacity,
     View,
 } from 'react-native'
 
+import { Button } from '../../components'
 import theme from '../../lib/variables/theme'
 
 import { HomeAddDialog } from './HomeAddDialog'
@@ -34,20 +34,16 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     logOutButton: {
-        alignItems: 'center',
+        backgroundColor: theme.color.transparent,
         borderColor: theme.color.gray.light350,
-        borderRadius: 5,
         borderWidth: 1,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
+        height: 40,
         marginBottom: 20,
         paddingVertical: 10,
         width: '100%',
     },
     logOutButtonText: {
         color: theme.color.gray.light200,
-        fontFamily: theme.fontFamily.RobotoRegular,
     },
     root: {
         alignItems: 'center',
@@ -66,14 +62,12 @@ export const Home: React.FunctionComponent = () => {
 
     return (
         <View style={styles.root}>
-            <TouchableOpacity
+            <Button
+                label="Log Out"
+                labelStyle={styles.logOutButtonText}
                 onPress={handleLogOut}
                 style={styles.logOutButton}
-            >
-                <Text style={styles.logOutButtonText}>
-                    Log Out
-                </Text>
-            </TouchableOpacity>
+            />
             <HomeCounters />
             <View style={styles.header}>
                 <Text style={styles.date}>

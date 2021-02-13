@@ -4,14 +4,13 @@ import { useFormik } from 'formik'
 import * as React from 'react'
 import {
     StyleSheet,
-    Text,
     TextInput,
-    TouchableOpacity,
 } from 'react-native'
 import useToggle from 'react-use/lib/useToggle'
 import * as Yup from 'yup'
 
 import {
+    Button,
     Dialog,
     DialogActions,
     DialogContent,
@@ -27,27 +26,9 @@ import theme from '../../../lib/variables/theme'
 import type { HomeAddDialogFormTypes } from './HomeAddDialog.types'
 
 const styles = StyleSheet.create({
-    cancelButton: {
-        backgroundColor: theme.color.purple.main,
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-    },
     checkbox: {
         marginTop: 20,
         width: '100%',
-    },
-    confirmButton: {
-        backgroundColor: theme.color.green.main,
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-    },
-    confirmButtonText: {
-        color: theme.color.white,
-    },
-    dialogButtonText: {
-        color: theme.color.white,
     },
     inputField: {
         borderColor: theme.color.gray.light350,
@@ -56,15 +37,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 5,
         width: '100%',
-    },
-    toggleButton: {
-        backgroundColor: theme.color.purple.main,
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-    },
-    toggleButtonText: {
-        color: theme.color.white,
     },
 })
 
@@ -139,14 +111,10 @@ export const HomeAddDialog: React.FunctionComponent = () => {
 
     return (
         <>
-            <TouchableOpacity
+            <Button
+                label="Add"
                 onPress={toggleOpen}
-                style={styles.toggleButton}
-            >
-                <Text style={styles.toggleButtonText}>
-                    Add
-                </Text>
-            </TouchableOpacity>
+            />
             <Dialog isOpen={isOpen}>
                 <DialogHeader title="Add New" />
                 <DialogContent>
@@ -157,22 +125,15 @@ export const HomeAddDialog: React.FunctionComponent = () => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <TouchableOpacity
+                    <Button
+                        label="Cancel"
                         onPress={handleCancel}
-                        style={styles.cancelButton}
-                    >
-                        <Text style={styles.dialogButtonText}>
-                            Cancel
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
+                    />
+                    <Button
+                        backgroundColor={theme.color.green.main}
+                        label="Add"
                         onPress={handleSubmit}
-                        style={styles.confirmButton}
-                    >
-                        <Text style={styles.confirmButtonText}>
-                            Add
-                        </Text>
-                    </TouchableOpacity>
+                    />
                 </DialogActions>
             </Dialog>
         </>

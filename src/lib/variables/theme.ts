@@ -2,6 +2,7 @@
 
 export default {
     color: {
+        transparent: '#fff0',
         green: {
             main: '#50d890',
         },

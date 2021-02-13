@@ -31,26 +31,26 @@ export const App: React.FunctionComponent = () => {
      *
      *  1. Fetch template tasks
      *  2. Fetch tasks for today
-     *  3. See which template tasks are not present in todays tasks
+     *  3. See which template tasks are not present in todays task list
      *  4. Create those
      */
     const generateTasks = async () => {
-        const tasks: TaskType[] = []
+        const templateTasks: TaskType[] = []
         const todaysTasks: TaskType[] = []
 
         await connection(COLLECTION.TASKS)
             .where('user', '==', user?.uid)
             .get()
             .then((results) => {
-                const fetchedTasks: TaskType[] = []
+                const fetchedTemplateTasks: TaskType[] = []
 
                 results.forEach((result) => {
                     const task = result.data() as TaskType
 
-                    fetchedTasks.push(task)
+                    fetchedTemplateTasks.push(task)
                 })
 
-                tasks.push(...fetchedTasks)
+                templateTasks.push(...fetchedTemplateTasks)
             })
 
         await connection(COLLECTION.TASK_HISTORY)
@@ -68,7 +68,7 @@ export const App: React.FunctionComponent = () => {
                 todaysTasks.push(...fetchedTodaysTasks)
             })
 
-        const tasksToCreate = tasks.reduce((accumulator: TaskType[], task) => {
+        const tasksToCreate = templateTasks.reduce((accumulator: TaskType[], task) => {
             const isCreated = todaysTasks.some((historyTask) => {
                 return historyTask.name === task.name
             })
@@ -80,10 +80,10 @@ export const App: React.FunctionComponent = () => {
             }
         }, [])
 
-        const taskPromises = tasksToCreate.reduce((accumulator: Promise<void>[], task) => {
+        const createTaskPromises = tasksToCreate.reduce((accumulator: Promise<void>[], task) => {
             const taskId = cuid()
 
-            const taskJob = connection(COLLECTION.TASK_HISTORY)
+            const createTaskPromise = connection(COLLECTION.TASK_HISTORY)
                 .doc(taskId)
                 .set({
                     ...task,
@@ -92,10 +92,10 @@ export const App: React.FunctionComponent = () => {
                     isCompleted: false,
                 })
 
-            return [...accumulator, taskJob]
+            return [...accumulator, createTaskPromise]
         }, [])
 
-        void Promise.all(taskPromises)
+        void Promise.all(createTaskPromises)
     }
 
     React.useEffect(() => {
