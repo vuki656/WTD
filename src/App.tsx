@@ -1,6 +1,7 @@
 import { GoogleSignin } from '@react-native-community/google-signin'
 import cuid from 'cuid'
 import * as React from 'react'
+import { LogBox } from 'react-native'
 
 import { useAuthInit } from './lib/hooks/useAuthInit/useAuthInit'
 import {
@@ -8,7 +9,6 @@ import {
     connection,
 } from './lib/utils/connection'
 import { getCurrentUser } from './lib/utils/getCurrentUser'
-import { initErrorSuppression } from './lib/utils/initErrorSuppression'
 import { TODAYS_DATE } from './lib/variables/constants'
 import { Home } from './modules/Home'
 import type { TaskType } from './modules/Home/HomeTaskList/HomeTaskList.types'
@@ -18,7 +18,7 @@ GoogleSignin.configure({
     webClientId: '529897088428-hudun0c47un7u9d04uvr6gt3lbovroof.apps.googleusercontent.com',
 })
 
-initErrorSuppression()
+LogBox.ignoreAllLogs()
 
 // TODO: TURNING OFF FIREBASE SUBS
 export const App: React.FunctionComponent = () => {
