@@ -10,6 +10,7 @@ import useToggle from 'react-use/lib/useToggle'
 import * as Yup from 'yup'
 
 import {
+    Checkbox,
     Dialog,
     DialogActions,
     DialogContent,
@@ -25,6 +26,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 10,
         paddingVertical: 5,
+    },
+    checkbox: {
+        marginTop: 20,
+        width: '100%',
     },
     confirmButton: {
         backgroundColor: theme.color.green.main,
@@ -68,7 +73,10 @@ export const HomeAddDialog: React.FunctionComponent = () => {
     const [isOpen, toggleOpen] = useToggle(false)
 
     const form = useFormik<HomeAddDialogFormTypes>({
-        initialValues: { name: '' },
+        initialValues: {
+            isRepeating: false,
+            name: '',
+        },
         onSubmit: (formValues) => {
             console.log(formValues)
         },
@@ -84,7 +92,11 @@ export const HomeAddDialog: React.FunctionComponent = () => {
     const handleSubmit = () => {
         form.handleSubmit()
         toggleOpen()
-        form.resetForm()
+
+        // TODO: FIX
+        setTimeout(() => {
+            form.resetForm()
+        }, 200)
     }
 
     return (
@@ -104,6 +116,15 @@ export const HomeAddDialog: React.FunctionComponent = () => {
                         onChangeText={form.handleChange('name')}
                         style={styles.inputField}
                         value={form.values.name}
+                    />
+                    <Checkbox
+                        falseCheckboxColor={theme.color.red.main}
+                        isChecked={form.values.isRepeating}
+                        label="Repeat"
+                        onValueChange={async (value) => form.setFieldValue('isRepeating', value)}
+                        strikeTroughOnTrue={false}
+                        style={styles.checkbox}
+                        trueCheckboxColor={theme.color.green.main}
                     />
                 </DialogContent>
                 <DialogActions>
