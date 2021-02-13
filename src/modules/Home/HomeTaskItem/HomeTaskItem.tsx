@@ -5,6 +5,10 @@ import {
 } from 'react-native'
 
 import { Checkbox } from '../../../components'
+import {
+    COLLECTION,
+    connection,
+} from '../../../lib/utils/connection'
 import theme from '../../../lib/variables/theme'
 
 import type { HomeTaskItemProps } from './HomeTaskItem.types'
@@ -29,16 +33,26 @@ const styles = StyleSheet.create({
 export const HomeTaskItem: React.FunctionComponent<HomeTaskItemProps> = (props) => {
     const { task } = props
 
+    const handleCheck = (value: boolean) => {
+        void connection(COLLECTION.TASK_HISTORY)
+            .doc(task.id)
+            .update({
+                isCompleted: value,
+            })
+    }
+
     return (
         <View style={styles.root}>
             <Checkbox
                 falseCheckboxColor={theme.color.white}
-                isChecked={task.completed}
+                isChecked={task.isCompleted}
                 label={task.name}
                 labelStyle={{ color: theme.color.white }}
+                onValueChange={handleCheck}
                 strikeTroughOnTrue={true}
                 style={styles.checkbox}
                 trueCheckboxColor={theme.color.white}
+                value={task.isCompleted}
             />
         </View>
     )
