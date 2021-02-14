@@ -4,12 +4,13 @@ export type TaskType = {
     isCompleted: boolean
 }
 
-export type HistoryTask = {
+export type HistoryTaskType = {
     id: string
     name: string
     isCompleted: boolean
     date: number
     user: string
+    parentId: string
 }
 
 export type StatsUpdateType = {

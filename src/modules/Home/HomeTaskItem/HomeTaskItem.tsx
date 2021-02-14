@@ -18,7 +18,7 @@ import {
 import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
 import theme from '../../../lib/variables/theme'
 import type {
-    HistoryTask,
+    HistoryTaskType,
     StatsUpdateType,
 } from '../HomeTaskList/HomeTaskList.types'
 
@@ -64,7 +64,7 @@ export const HomeTaskItem: React.FunctionComponent<HomeTaskItemProps> = (props) 
         }
 
         results.forEach((result) => {
-            const { date, isCompleted } = result.data() as HistoryTask
+            const { date, isCompleted } = result.data() as HistoryTaskType
 
             const formattedDate = unixToDate(date)
 
@@ -101,7 +101,7 @@ export const HomeTaskItem: React.FunctionComponent<HomeTaskItemProps> = (props) 
         let streak = 0
 
         results.forEach((result) => {
-            const historyTask = result.data() as HistoryTask
+            const historyTask = result.data() as HistoryTaskType
 
             console.log(historyTask.date)
         })

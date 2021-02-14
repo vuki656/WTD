@@ -16,7 +16,7 @@ import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
 import { HomeTaskItem } from '../HomeTaskItem'
 
 import type {
-    HistoryTask,
+    HistoryTaskType,
     TaskType,
 } from './HomeTaskList.types'
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 
 // TODO: SAVE LIST ORDER
 export const HomeTaskList: React.FunctionComponent = () => {
-    const [tasks, setTasks] = React.useState<HistoryTask[]>([])
+    const [tasks, setTasks] = React.useState<HistoryTaskType[]>([])
 
     const user = getCurrentUser()
 
@@ -42,14 +42,14 @@ export const HomeTaskList: React.FunctionComponent = () => {
             )
             .where('user', '==', user?.uid)
             .onSnapshot((results) => {
-                const fetchedTasks: HistoryTask[] = []
+                const fetchedTasks: HistoryTaskType[] = []
 
                 if (!results) {
                     return
                 }
 
                 results.forEach((result) => {
-                    const task = result.data() as HistoryTask
+                    const task = result.data() as HistoryTaskType
 
                     fetchedTasks.push(task)
                 })

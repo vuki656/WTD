@@ -1,5 +1,4 @@
 import cuid from 'cuid'
-import dayjs from 'dayjs'
 import { useFormik } from 'formik'
 import * as React from 'react'
 import {
@@ -20,6 +19,7 @@ import {
     COLLECTION,
     connection,
 } from '../../../lib/utils/connection'
+import { todayUnix } from '../../../lib/utils/date'
 import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
 import theme from '../../../lib/variables/theme'
 
@@ -54,16 +54,18 @@ export const HomeAddDialog: React.FunctionComponent = () => {
 
     const saveTaskInHistory = async (
         formValues: HomeAddDialogFormTypes,
-        taskId: string
+        parentId: string
     ) => {
+        const historyTaskId = cuid()
+
         await connection(COLLECTION.TASK_HISTORY)
-            .doc(taskId)
+            .doc(historyTaskId)
             .set({
-                date: dayjs().startOf('day')
-                    .toDate(),
-                id: taskId,
+                date: todayUnix,
+                id: historyTaskId,
                 isCompleted: false,
                 name: formValues.name,
+                parentId: parentId,
                 user: user?.uid,
             })
     }
