@@ -1,5 +1,7 @@
-import type { TaskType } from '../HomeTaskList/HomeTaskList.types'
+import type { TouchableOpacityProps } from 'react-native'
 
-export type HomeTaskItemProps = {
-    task: TaskType
+import type { HistoryTaskType } from '../HomeTaskList'
+
+export type HomeTaskItemProps = Pick<TouchableOpacityProps, 'onLongPress'> & {
+    task: HistoryTaskType
 }

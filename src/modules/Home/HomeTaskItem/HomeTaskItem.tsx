@@ -3,8 +3,9 @@ import dayjs from 'dayjs'
 import * as React from 'react'
 import {
     StyleSheet,
-    View,
+    TouchableOpacity,
 } from 'react-native'
+import useToggle from 'react-use/lib/useToggle'
 
 import { Checkbox } from '../../../components'
 import {
@@ -17,10 +18,12 @@ import {
 } from '../../../lib/utils/date'
 import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
 import theme from '../../../lib/variables/theme'
+import { HomeTaskDialog } from '../HomeTaskDialog/HomeTaskDialog'
+import type { HomeTaskDialogFormTypes } from '../HomeTaskDialog/HomeTaskDialog.types'
 import type {
     HistoryTaskType,
     StatsUpdateType,
-} from '../HomeTaskList/HomeTaskList.types'
+} from '../HomeTaskList'
 
 import type { HomeTaskItemProps } from './HomeTaskItem.types'
 
@@ -44,9 +47,14 @@ const styles = StyleSheet.create({
 })
 
 export const HomeTaskItem: React.FunctionComponent<HomeTaskItemProps> = (props) => {
-    const { task } = props
+    const {
+        onLongPress,
+        task,
+    } = props
 
     const user = getCurrentUser()
+
+    const [isDialogOpen, toggleDialog] = useToggle(false)
 
     const checkTask = (value: boolean) => {
         void connection(COLLECTION.TASK_HISTORY)
@@ -100,12 +108,6 @@ export const HomeTaskItem: React.FunctionComponent<HomeTaskItemProps> = (props) 
     const updateStreak = async (results: FirestoreResult) => {
         let streak = 0
 
-        results.forEach((result) => {
-            const historyTask = result.data() as HistoryTaskType
-
-            console.log(historyTask.date)
-        })
-
         await connection(COLLECTION.STATS)
             .doc(user?.uid)
             .update({
@@ -129,19 +131,47 @@ export const HomeTaskItem: React.FunctionComponent<HomeTaskItemProps> = (props) 
         void updateStats()
     }
 
+    const updateTask = async (formValues: HomeTaskDialogFormTypes) => {
+        await connection(COLLECTION.TASK_HISTORY)
+            .doc(task.id)
+            .update({
+                name: formValues.name,
+            })
+
+        await connection(COLLECTION.TASKS)
+            .doc(task.parentId)
+            .update({
+                name: formValues.name,
+            })
+    }
+
     return (
-        <View style={styles.root}>
-            <Checkbox
-                falseCheckboxColor={theme.color.white}
-                isChecked={task.isCompleted}
-                label={task.name}
-                labelStyle={{ color: theme.color.white }}
-                onValueChange={handleCheck}
-                strikeTroughOnTrue={true}
-                style={styles.checkbox}
-                trueCheckboxColor={theme.color.white}
-                value={task.isCompleted}
+        <>
+            <TouchableOpacity
+                onLongPress={onLongPress}
+                onPress={toggleDialog}
+                style={styles.root}
+            >
+                <Checkbox
+                    falseCheckboxColor={theme.color.white}
+                    isChecked={task.isCompleted}
+                    label={task.name}
+                    labelStyle={{ color: theme.color.white }}
+                    onValueChange={handleCheck}
+                    strikeTroughOnTrue={true}
+                    style={styles.checkbox}
+                    trueCheckboxColor={theme.color.white}
+                    value={task.isCompleted}
+                />
+            </TouchableOpacity>
+            <HomeTaskDialog
+                isOpen={isDialogOpen}
+                onSubmit={updateTask}
+                submitButtonText="Save"
+                task={task}
+                title="Edit"
+                toggleOpen={toggleDialog}
             />
-        </View>
+        </>
     )
 }

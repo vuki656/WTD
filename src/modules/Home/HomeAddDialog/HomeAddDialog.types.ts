@@ -1,12 +1,11 @@
-import type React from 'react'
-
-export type HomeAddDialogFormTypes = {
-    name: string
-}
+import type { HomeTaskDialogFormTypes } from '../HomeTaskDialog/HomeTaskDialog.types'
+import type { HistoryTaskType } from '../HomeTaskList'
 
 export type HomeTaskDialogProps = {
-    triggerElement: React.ReactElement
-    submitElement: React.ReactElement
+    isOpen: boolean
+    submitButtonText: string
     title: string
-    onSubmit(formValues: HomeAddDialogFormTypes): Promise<void>
+    task?: HistoryTaskType
+    toggleOpen(): void
+    onSubmit(formValues: HomeTaskDialogFormTypes): Promise<void>
 }

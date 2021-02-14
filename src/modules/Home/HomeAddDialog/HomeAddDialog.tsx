@@ -1,23 +1,23 @@
 import cuid from 'cuid'
 import * as React from 'react'
+import useToggle from 'react-use/lib/useToggle'
 
-import { Button } from '../../../components'
 import {
     COLLECTION,
     connection,
 } from '../../../lib/utils/connection'
 import { todayUnix } from '../../../lib/utils/date'
 import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
-import theme from '../../../lib/variables/theme'
 import { HomeTaskDialog } from '../HomeTaskDialog/HomeTaskDialog'
-
-import type { HomeAddDialogFormTypes } from './HomeAddDialog.types'
+import type { HomeTaskDialogFormTypes } from '../HomeTaskDialog/HomeTaskDialog.types'
 
 export const HomeAddDialog: React.FunctionComponent = () => {
     const user = getCurrentUser()
 
+    const [isDialogOpen, toggleDialog] = useToggle(false)
+
     const saveTaskInHistory = async (
-        formValues: HomeAddDialogFormTypes,
+        formValues: HomeTaskDialogFormTypes,
         parentId: string
     ) => {
         const historyTaskId = cuid()
@@ -34,7 +34,7 @@ export const HomeAddDialog: React.FunctionComponent = () => {
             })
     }
 
-    const saveTask = async (formValues: HomeAddDialogFormTypes) => {
+    const saveTask = async (formValues: HomeTaskDialogFormTypes) => {
         const taskId = cuid()
 
         await connection(COLLECTION.TASKS)
@@ -50,17 +50,11 @@ export const HomeAddDialog: React.FunctionComponent = () => {
 
     return (
         <HomeTaskDialog
+            isOpen={isDialogOpen}
             onSubmit={saveTask}
-            submitElement={(
-                <Button
-                    backgroundColor={theme.color.green.main}
-                    label="Add"
-                />
-            )}
+            submitButtonText="Add"
             title="Add"
-            triggerElement={(
-                <Button label="Add" />
-            )}
+            toggleOpen={toggleDialog}
         />
 
     )

@@ -1,7 +1,6 @@
 import * as React from 'react'
 import {
     StyleSheet,
-    TouchableOpacity,
     View,
 } from 'react-native'
 import type { RenderItemParams } from 'react-native-draggable-flatlist'
@@ -15,10 +14,7 @@ import { todayUnix } from '../../../lib/utils/date'
 import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
 import { HomeTaskItem } from '../HomeTaskItem'
 
-import type {
-    HistoryTaskType,
-    TaskType,
-} from './HomeTaskList.types'
+import type { HistoryTaskType } from './HomeTaskList.types'
 
 const styles = StyleSheet.create({
     root: {
@@ -62,13 +58,14 @@ export const HomeTaskList: React.FunctionComponent = () => {
         fetchTasks()
     }, [])
 
-    const listItem = React.useCallback((props: RenderItemParams<TaskType>) => {
+    const listItem = React.useCallback((props: RenderItemParams<HistoryTaskType>) => {
         const { drag, item } = props
 
         return (
-            <TouchableOpacity onLongPress={drag}>
-                <HomeTaskItem task={item} />
-            </TouchableOpacity>
+            <HomeTaskItem
+                onLongPress={drag}
+                task={item}
+            />
         )
     }, [])
 

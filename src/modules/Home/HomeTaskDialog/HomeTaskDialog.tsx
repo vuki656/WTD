@@ -4,7 +4,6 @@ import {
     StyleSheet,
     TextInput,
 } from 'react-native'
-import useToggle from 'react-use/lib/useToggle'
 import * as Yup from 'yup'
 
 import {
@@ -20,10 +19,6 @@ import type { HomeTaskDialogProps } from '../HomeAddDialog/HomeAddDialog.types'
 import type { HomeTaskDialogFormTypes } from './HomeTaskDialog.types'
 
 const styles = StyleSheet.create({
-    checkbox: {
-        marginTop: 20,
-        width: '100%',
-    },
     inputField: {
         borderColor: theme.color.gray.light350,
         borderRadius: 5,
@@ -43,17 +38,17 @@ const ValidationSchema = Yup.object()
 
 export const HomeTaskDialog: React.FunctionComponent<HomeTaskDialogProps> = (props) => {
     const {
+        isOpen,
         onSubmit,
-        submitElement,
+        submitButtonText,
+        task,
         title,
-        triggerElement,
+        toggleOpen,
     } = props
-
-    const [isOpen, toggleOpen] = useToggle(true)
 
     const form = useFormik<HomeTaskDialogFormTypes>({
         initialValues: {
-            name: '',
+            name: task?.name ?? '',
         },
         onSubmit: (formValues) => {
             void onSubmit(formValues)
@@ -78,31 +73,26 @@ export const HomeTaskDialog: React.FunctionComponent<HomeTaskDialogProps> = (pro
     }
 
     return (
-        <>
-            {React.cloneElement(
-                triggerElement,
-                { onPress: toggleOpen }
-            )}
-            <Dialog isOpen={isOpen}>
-                <DialogHeader title={title} />
-                <DialogContent>
-                    <TextInput
-                        onChangeText={form.handleChange('name')}
-                        style={styles.inputField}
-                        value={form.values.name}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        label="Cancel"
-                        onPress={handleCancel}
-                    />
-                    {React.cloneElement(
-                        submitElement,
-                        { onPress: handleSubmit }
-                    )}
-                </DialogActions>
-            </Dialog>
-        </>
+        <Dialog isOpen={isOpen}>
+            <DialogHeader title={title} />
+            <DialogContent>
+                <TextInput
+                    onChangeText={form.handleChange('name')}
+                    style={styles.inputField}
+                    value={form.values.name}
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button
+                    label="Cancel"
+                    onPress={handleCancel}
+                />
+                <Button
+                    backgroundColor={theme.color.green.main}
+                    label={submitButtonText}
+                    onPress={handleSubmit}
+                />
+            </DialogActions>
+        </Dialog>
     )
 }
