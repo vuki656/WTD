@@ -56,12 +56,11 @@ export const HomeAddDialog: React.FunctionComponent = () => {
         formValues: HomeAddDialogFormTypes,
         taskId: string
     ) => {
-        const todaysDate = dayjs().format('DD-MM-YYYY')
-
         await connection(COLLECTION.TASK_HISTORY)
             .doc(taskId)
             .set({
-                date: todaysDate,
+                date: dayjs().startOf('day')
+                    .toDate(),
                 id: taskId,
                 isCompleted: false,
                 name: formValues.name,

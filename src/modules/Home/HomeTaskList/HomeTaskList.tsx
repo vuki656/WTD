@@ -11,11 +11,14 @@ import {
     COLLECTION,
     connection,
 } from '../../../lib/utils/connection'
+import { todayUnix } from '../../../lib/utils/date'
 import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
-import { TODAYS_DATE } from '../../../lib/variables/constants'
 import { HomeTaskItem } from '../HomeTaskItem'
 
-import type { TaskType } from './HomeTaskList.types'
+import type {
+    HistoryTask,
+    TaskType,
+} from './HomeTaskList.types'
 
 const styles = StyleSheet.create({
     root: {
@@ -26,19 +29,27 @@ const styles = StyleSheet.create({
 
 // TODO: SAVE LIST ORDER
 export const HomeTaskList: React.FunctionComponent = () => {
-    const [tasks, setTasks] = React.useState<TaskType[]>([])
+    const [tasks, setTasks] = React.useState<HistoryTask[]>([])
 
     const user = getCurrentUser()
 
     const fetchTasks = () => {
         void connection(COLLECTION.TASK_HISTORY)
-            .where('date', '==', TODAYS_DATE)
+            .where(
+                'date',
+                '==',
+                todayUnix
+            )
             .where('user', '==', user?.uid)
             .onSnapshot((results) => {
-                const fetchedTasks: TaskType[] = []
+                const fetchedTasks: HistoryTask[] = []
+
+                if (!results) {
+                    return
+                }
 
                 results.forEach((result) => {
-                    const task = result.data() as TaskType
+                    const task = result.data() as HistoryTask
 
                     fetchedTasks.push(task)
                 })

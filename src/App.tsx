@@ -8,8 +8,8 @@ import {
     COLLECTION,
     connection,
 } from './lib/utils/connection'
+import { todayUnix } from './lib/utils/date'
 import { getCurrentUser } from './lib/utils/getCurrentUser'
-import { TODAYS_DATE } from './lib/variables/constants'
 import { Home } from './modules/Home'
 import type { TaskType } from './modules/Home/HomeTaskList/HomeTaskList.types'
 import { Login } from './modules/Login'
@@ -54,7 +54,7 @@ export const App: React.FunctionComponent = () => {
             })
 
         await connection(COLLECTION.TASK_HISTORY)
-            .where('date', '==', TODAYS_DATE)
+            .where('date', '==', todayUnix)
             .get()
             .then((results) => {
                 const fetchedTodaysTasks: TaskType[] = []
@@ -70,6 +70,7 @@ export const App: React.FunctionComponent = () => {
 
         const tasksToCreate = templateTasks.reduce((accumulator: TaskType[], task) => {
             const isCreated = todaysTasks.some((historyTask) => {
+                // FIXME: SAME NAME WILL BREAK THIS
                 return historyTask.name === task.name
             })
 
@@ -87,7 +88,7 @@ export const App: React.FunctionComponent = () => {
                 .doc(taskId)
                 .set({
                     ...task,
-                    date: TODAYS_DATE,
+                    date: todayUnix,
                     id: taskId,
                     isCompleted: false,
                 })
