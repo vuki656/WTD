@@ -2,12 +2,14 @@ import cuid from 'cuid'
 import * as React from 'react'
 import useToggle from 'react-use/lib/useToggle'
 
+import { Button } from '../../../components'
 import {
     COLLECTION,
     connection,
 } from '../../../lib/utils/connection'
 import { todayUnix } from '../../../lib/utils/date'
 import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
+import theme from '../../../lib/variables/theme'
 import { HomeTaskDialog } from '../HomeTaskDialog/HomeTaskDialog'
 import type { HomeTaskDialogFormTypes } from '../HomeTaskDialog/HomeTaskDialog.types'
 
@@ -49,13 +51,20 @@ export const HomeAddDialog: React.FunctionComponent = () => {
     }
 
     return (
-        <HomeTaskDialog
-            isOpen={isDialogOpen}
-            onSubmit={saveTask}
-            submitButtonText="Add"
-            title="Add"
-            toggleOpen={toggleDialog}
-        />
+        <>
+            <Button
+                backgroundColor={theme.color.purple.main}
+                label="Add"
+                onPress={toggleDialog}
+            />
+            <HomeTaskDialog
+                isOpen={isDialogOpen}
+                onSubmit={saveTask}
+                submitButtonText="Add"
+                title="Add"
+                toggleOpen={toggleDialog}
+            />
+        </>
 
     )
 }
