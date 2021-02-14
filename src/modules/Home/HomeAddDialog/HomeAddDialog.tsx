@@ -1,20 +1,7 @@
 import cuid from 'cuid'
-import { useFormik } from 'formik'
 import * as React from 'react'
-import {
-    StyleSheet,
-    TextInput,
-} from 'react-native'
-import useToggle from 'react-use/lib/useToggle'
-import * as Yup from 'yup'
 
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogHeader,
-} from '../../../components'
+import { Button } from '../../../components'
 import {
     COLLECTION,
     connection,
@@ -22,34 +9,11 @@ import {
 import { todayUnix } from '../../../lib/utils/date'
 import { getCurrentUser } from '../../../lib/utils/getCurrentUser'
 import theme from '../../../lib/variables/theme'
+import { HomeTaskDialog } from '../HomeTaskDialog/HomeTaskDialog'
 
 import type { HomeAddDialogFormTypes } from './HomeAddDialog.types'
 
-const styles = StyleSheet.create({
-    checkbox: {
-        marginTop: 20,
-        width: '100%',
-    },
-    inputField: {
-        borderColor: theme.color.gray.light350,
-        borderRadius: 5,
-        borderWidth: 1,
-        paddingHorizontal: 15,
-        paddingVertical: 5,
-        width: '100%',
-    },
-})
-
-const ValidationSchema = Yup.object()
-    .shape({
-        name: Yup.string()
-            .max(2000, 'Too long.')
-            .required('Required'),
-    })
-
 export const HomeAddDialog: React.FunctionComponent = () => {
-    const [isOpen, toggleOpen] = useToggle(false)
-
     const user = getCurrentUser()
 
     const saveTaskInHistory = async (
@@ -84,60 +48,20 @@ export const HomeAddDialog: React.FunctionComponent = () => {
         await saveTaskInHistory(formValues, taskId)
     }
 
-    const form = useFormik<HomeAddDialogFormTypes>({
-        initialValues: {
-            name: '',
-        },
-        onSubmit: (formValues) => {
-            void saveTask(formValues)
-        },
-        validateOnChange: false,
-        validationSchema: ValidationSchema,
-    })
-
-    const handleCancel = () => {
-        toggleOpen()
-        form.resetForm()
-    }
-
-    const handleSubmit = () => {
-        form.handleSubmit()
-        toggleOpen()
-
-        // TODO: FIX
-        setTimeout(() => {
-            form.resetForm()
-        }, 200)
-    }
-
     return (
-        <>
-            <Button
-                label="Add"
-                onPress={toggleOpen}
-            />
-            <Dialog isOpen={isOpen}>
-                <DialogHeader title="Add New" />
-                <DialogContent>
-                    <TextInput
-                        onChangeText={form.handleChange('name')}
-                        style={styles.inputField}
-                        value={form.values.name}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        label="Cancel"
-                        onPress={handleCancel}
-                    />
-                    <Button
-                        backgroundColor={theme.color.green.main}
-                        label="Add"
-                        onPress={handleSubmit}
-                    />
-                </DialogActions>
-            </Dialog>
-        </>
+        <HomeTaskDialog
+            onSubmit={saveTask}
+            submitElement={(
+                <Button
+                    backgroundColor={theme.color.green.main}
+                    label="Add"
+                />
+            )}
+            title="Add"
+            triggerElement={(
+                <Button label="Add" />
+            )}
+        />
 
     )
 }
